@@ -1,20 +1,3 @@
-The MIT License (MIT)
+The paper studied the problem of persistent query attack to probabilistic data structures that allow approximate membership check. The data structures include Bloom filter, Cuckoo filter, quotient filter and XOR filter. The attacker can access several versions of the filters in a series of updates (addition or removal of set members). Its goal is to confirm whether certain target elements are in the set. The finding was that for Bloom, cuckoo and quotient filters the attacker does not get any significant benefit. But for XOR filter, the attacker can be able to infer with almost certainty if the element has been inserted in the filter.
 
-Copyright (c) 2022 Maruan Al-Shedivat.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+My main objections mainly are: (1) the advantage the adversary can get seems to be small. The false positive rate is usually small for those filters in practice. So the adversary is pretty certain the element is in the set if getting a yes. The persistent attack only reduces false positive which may not be important to the adversary. (2) XOR filter was designed for static set, not supporting addition and removal. So is it reasonable to say this is a vulnerability? I would doubt if anyone will use XOR filter for dynamic set, as the overhead for rebuilding the filter is probably too much (they can use another filter that supports dynamic set in the first place). 
